@@ -29,15 +29,16 @@ function customerSuccessBalancing(
   activesCSsOrderedByMinimunScore.forEach((currentCustumerSuccess) => {
     let clientQuantity = 0;
 
-    for (let i = 0; i < customers.length; i++) {
+    customers.forEach((customer) => {
       const isCsMatchesCustomerScore =
-        customers[i].score <= currentCustumerSuccess.score;
-      const isCustomerNotAssigned = !customers[i].assigned;
+        customer.score <= currentCustumerSuccess.score;
+      const isCustomerNotAssigned = !customer.assigned;
+
       if (isCsMatchesCustomerScore && isCustomerNotAssigned) {
         clientQuantity++;
-        customers[i].assigned = true;
+        customer.assigned = true;
       }
-    }
+    });
 
     if (clientQuantity > highestClientQuantity) {
       highestClientQuantity = clientQuantity;
